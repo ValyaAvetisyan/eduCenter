@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student</title>
+</head>
+<body>
+
+<ul th:each="subject : ${subjects}">
+    <a th:href="@{/student/printSubject(subjectId=${subject.id})}">
+        <li th:text="${subject.name}"/>
+    </a>
+</ul>
+
+
+<form action="#" th:action="@{/student/changeData}" th:object="${user}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Surname: <input type="text" th:field="*{surname}"/></p>
+    <p>Email: <input type="email" th:field="*{email}"/></p>
+    <p>Password: <input type="password" th:field="*{password}"/></p>
+    <input type="hidden" th:value="${user.id}" th:name="id"/>
+    <p><input type="submit" value="Submit"/></p>
+</form>
+
+</body>
+</html>

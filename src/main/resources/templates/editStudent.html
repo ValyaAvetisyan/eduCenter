@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Student</title>
+</head>
+<body>
+<form action="#" th:action="@{/manager/updateStudent}" th:object="${user}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Surname: <input type="text" th:field="*{surname}"/></p>
+    <p>Email: <input type="email" th:field="*{email}"/></p>
+    <p>Password: <input type="password" th:field="*{password}"/></p>
+    <ul>
+        <li th:each="subject: ${subjects}">
+            <input type="checkbox"
+                   th:field="*{subjects}"
+                   th:value="${subject.id}"
+                   th:text="${subject.name}"
+            />
+        </li>
+    </ul>
+    <input type="hidden" th:value="${user.id}" th:name="id"/>
+    <p><input type="submit" value="Submit"/></p>
+</form>
+
+</body>
+</html>

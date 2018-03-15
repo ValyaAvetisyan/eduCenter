@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit subject</title>
+</head>
+<body>
+<form action="#" th:action="@{/manager/updateSubject}" th:object="${subject}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Price: <input type="number" th:field="*{price}"/></p>
+    <p>Lecturer: <input type="text" th:field="*{lecturer}"/></p>
+    <input type="hidden" th:value="${subject.id}" th:name="id"/>
+    <p><input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

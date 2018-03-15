@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Subject</title>
+</head>
+<body>
+
+<ul>Name:
+    <li th:text="${subject.name}"/>
+    <br/>
+    Price:
+    <li th:text="${subject.price}"/>
+    <br/>
+    Lecturer:
+    <li th:text="${subject.lecturer}"/>
+    <br/>
+    Students:
+    <li th:each="user:${subject.users}" th:text="${user.name}"/>
+</ul>
+</body>
+</html>
