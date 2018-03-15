@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -24,6 +25,7 @@ public class User {
     @Column
     private String surname;
     @Column
+    @NotNull(message = "email cannot be null")
     private String email;
     @Column
     private String password;
