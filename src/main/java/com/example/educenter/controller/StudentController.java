@@ -1,5 +1,6 @@
 package com.example.educenter.controller;
 
+import com.example.educenter.model.Subject;
 import com.example.educenter.model.User;
 import com.example.educenter.model.UserType;
 import com.example.educenter.repository.SubjectRepository;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Objects;
+
 @Controller
 public class StudentController {
+    private static final String LOGIN = "login";
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -23,19 +27,32 @@ public class StudentController {
     private PasswordEncoder passwordEncoder;
 
 
-
     @GetMapping(value = "/student")
     public String studentPage(ModelMap map, @RequestParam("userId") int id) {
-        User user = userRepository.findOne(id);
-        map.addAttribute("user", user);
-        map.addAttribute("subjects", user.getSubjects());
-        return "student";
+        if (id > 0) {
+            User user = userRepository.findOne(id);
+            map.addAttribute("user", user);
+            map.addAttribute("subjects", user.getSubjects());
+            return "student";
+        }
+        return LOGIN;
     }
 
     @GetMapping(value = "/student/printSubject")
     public String printSubject(@RequestParam("subjectId") int id, ModelMap map) {
-        map.addAttribute("subject", subjectRepository.findOne(id));
-        return "mySubject";
+        boolean isValid = true;
+        if (id < 0) {
+            isValid = false;
+        }
+        Subject subject = subjectRepository.findOne(id);
+        if (Objects.isNull(subject)) {
+            isValid = false;
+        }
+        if (isValid) {
+            map.addAttribute("subject", subject);
+            return "mySubject";
+        }
+        return LOGIN;
     }
 
     @PostMapping(value = "/student/changeData")

@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     List<Subject> findAll();
+
     Subject findOneById(int id);
+
     List<Subject> findAllByUsersIsContaining(User user);
 }

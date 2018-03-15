@@ -1,11 +1,10 @@
-
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Manager</title>
 </head>
 <body>
 ADD SUBJECT:
-<form action="#" th:action="@{/manager/addSubject}" th:object="${subject}" method="post">
+<form action="#" th:action="@{/manager/addSubject}" th:object="${subjectModel}" method="post">
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p>Price: <input type="number" th:field="*{price}"/></p>
     <p>Lecturer: <input type="text" th:field="*{lecturer}"/></p>
@@ -13,18 +12,14 @@ ADD SUBJECT:
 </form>
 
 <p>ADD STUDENT:</p>
-<form action="#" th:action="@{/manager/addStudent}" th:object="${user}" method="post">
+<form action="#" th:action="@{/manager/addStudent}" th:object="${userModel}" method="post">
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p>Surname: <input type="text" th:field="*{surname}"/></p>
     <p>Email: <input type="email" th:field="*{email}"/></p>
     <p>Password: <input type="password" th:field="*{password}"/></p>
     <ul>
         <li th:each="subject: ${subjects}">
-            <input type="checkbox"
-                   th:field="*{subjects}"
-                   th:value="${subject.id}"
-                   th:text="${subject.name}"
-            />
+            <input type="checkbox" th:field="*{subjects}" th:value="${subject.id}" th:text="${subject.name}"/>
         </li>
     </ul>
     <p><input type="submit" value="Submit"/></p>
@@ -35,25 +30,17 @@ ALL SUBJECTS:
 Subject's names:
 <ul th:each="subject : ${subjects}">
     <li th:text="${subject.name}"/>
-    <a th:href="@{/manager/deleteSubject(id=${subject.id})}">
-    delete
-</a>
-    <a th:href="@{/manager/editSubject(subjectId=${subject.id})}">
-    edit
-</a>
+    <a th:href="@{/manager/deleteSubject(id=${subject.id})}">delete</a>
+    <a th:href="@{/manager/editSubject(subjectId=${subject.id})}">edit</a>
 </ul>
 
 ALL STUDENTS:
 <br/>
-<ul th:each="user : ${users}">
-    <li th:text="${user.name}"/>
-    <li th:text="${user.surname}"/>
-    <a th:href="@{/manager/deleteStudent(id=${user.id})}">
-        delete
-    </a>
-    <a th:href="@{/manager/editStudent(id=${user.id})}">
-        edit
-    </a>
+<ul th:each="u : ${users}">
+    <li th:text="${u.name}"/>
+    <li th:text="${u.surname}"/>
+    <a th:href="@{/manager/deleteStudent(id=${u.id})}">delete</a>
+    <a th:href="@{/manager/editStudent(id=${u.id})}">edit</a>
 </ul>
 
 </body>

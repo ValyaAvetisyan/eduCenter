@@ -13,33 +13,38 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 public class EducenterApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
+    private static final String MANAGER_PASSWORD = "123456";
+    private static final String MANAGER_EMAIL = "manager";
+    private static final String MANAGER_NAME = "manager";
+    private static final String MANAGER_SURNAME = "manager";
 
-	public static void main(String[] args) {
-		SpringApplication.run(EducenterApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EducenterApplication.class, args);
+    }
 
-	@Autowired
-	private UserRepository userRepository;
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 
 
-	@Override
-	public void run(String... strings) throws Exception {
-		String email = "manager@gmail.com";
-		User oneByEmail = userRepository.findOneByEmail(email);
-		if (oneByEmail == null) {
-			userRepository.save(User.builder()
-					.email(email)
-					.password(new BCryptPasswordEncoder().encode("123456"))
-					.name("manager")
-					.surname("manager")
-					.type(UserType.MANAGER)
-					.build());
-		}
+    @Override
+    public void run(String... strings) throws Exception {
 
-	}
+        User oneByEmail = userRepository.findOneByEmail(MANAGER_EMAIL);
+        if (oneByEmail == null) {
+            userRepository.save(User.builder()
+                    .email(MANAGER_EMAIL)
+                    .password(new BCryptPasswordEncoder().encode(MANAGER_PASSWORD))
+                    .name(MANAGER_NAME)
+                    .surname(MANAGER_SURNAME)
+                    .type(UserType.MANAGER)
+                    .build());
+        }
+
+    }
 
 }

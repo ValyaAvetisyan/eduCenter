@@ -25,12 +25,12 @@ public class User {
     @Column
     private String surname;
     @Column
-    @NotNull(message = "email cannot be null")
+    @NotNull(message = "Email cannot be null")
     private String email;
     @Column
     private String password;
     @Column(name = "user_type")
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private UserType type;
     @Column
     private boolean verify;
@@ -38,9 +38,9 @@ public class User {
     private String token;
     @ManyToMany
     @JoinTable(
-            name="subjects_users",
-            joinColumns=@JoinColumn(name="user_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="subject_id", referencedColumnName="id"))
+            name = "subjects_users",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id", referencedColumnName = "id"))
     private List<Subject> subjects;
 }
 
